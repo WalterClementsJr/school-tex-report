@@ -1,0 +1,371 @@
+@startuml
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+class assessment_scheme {
+   assignment: double precision
+   final_practice: double precision
+   final: double precision
+   final_theory: double precision
+   gpa: double precision
+   quiz: double precision
+   syllabus_id: bigint
+   id: bigint
+}
+class attendee_type {
+   description: varchar(255)
+   attendee_type_name: varchar(255)
+   attendee_type_id: bigint
+}
+class class_admin {
+   created_by: varchar(255)
+   created_date: timestamp
+   updated_by: varchar(255)
+   updated_date: timestamp
+   uuid: uuid
+   admin_uuid: uuid
+   class_id: bigint
+   id: bigint
+}
+class class_syllabus_unit {
+   syllabus_unit_id: uuid
+   trainer_uuid: uuid
+   location_id: bigint
+   training_program_syllabus_id: bigint
+   id: bigint
+}
+class class_training_program {
+   created_by: varchar(255)
+   created_date: timestamp
+   updated_by: varchar(255)
+   updated_date: timestamp
+   uuid: uuid
+   days: integer
+   hours: integer
+   name: varchar(255)
+   training_program_uuid: uuid
+   id: bigint
+}
+class contact_point {
+   content: varchar(255)
+   type: varchar(255)
+   fsu_id: bigint
+   id: bigint
+}
+class delivery_type {
+   descriptions: varchar(255)
+   icon: varchar(255)
+   name: varchar(255)
+   id: bigint
+}
+class fa_user {
+   created_by: uuid
+   created_time: timestamp
+   updated_by: uuid
+   updated_time: timestamp
+   uuid: uuid
+   address: varchar(255)
+   avatar: varchar(255)
+   birthdate: date
+   disabled: boolean
+   email: varchar(255)
+   expired: boolean
+   full_name: varchar(255)
+   gender: varchar(255)
+   locked: boolean
+   password: varchar(255)
+   site: bigint
+   status: varchar(255)
+   username: varchar(255)
+   fsu_id: bigint
+   role_id: bigint
+   id: bigint
+}
+class format_type {
+   abbreviation: varchar(255)
+   name: varchar(255)
+   id: bigint
+}
+class fsu {
+   name: varchar(255)
+   description: varchar(255)
+   id: bigint
+}
+class location {
+   address: varchar(255)
+   name: varchar(255)
+   site: bigint
+   id: bigint
+}
+class operation {
+   created_by: uuid
+   created_time: timestamp
+   updated_by: uuid
+   updated_time: timestamp
+   uuid: uuid
+   name: varchar(255)
+   id: bigint
+}
+class output_standard {
+   code: varchar(255)
+   descriptions: varchar(255)
+   name: varchar(255)
+   id: bigint
+}
+class permission {
+   created_by: uuid
+   created_time: timestamp
+   updated_by: uuid
+   updated_time: timestamp
+   uuid: uuid
+   name: varchar(255)
+   operation_id: bigint
+   resource_id: bigint
+   id: bigint
+}
+class position {
+   description: varchar(255)
+   position_name: varchar(255)
+   position_id: bigint
+}
+class program_content {
+   name: varchar(255)
+   id: bigint
+}
+class program_syllabus {
+   uuid: uuid
+   training_program_id: bigint
+   id: bigint
+}
+class resource {
+   created_by: uuid
+   created_time: timestamp
+   updated_by: uuid
+   updated_time: timestamp
+   uuid: uuid
+   name: varchar(255)
+   id: bigint
+}
+class role {
+   created_by: uuid
+   created_time: timestamp
+   updated_by: uuid
+   updated_time: timestamp
+   uuid: uuid
+   name: varchar(255)
+   id: bigint
+}
+class role_permission {
+   role_id: bigint
+   permission_id: bigint
+}
+class site {
+   abbreviation: varchar(255)
+   name: varchar(255)
+   id: bigint
+}
+class skill {
+   name: varchar(255)
+   id: bigint
+}
+class syllabus {
+   created_by: varchar(255)
+   created_date: timestamp
+   is_deleted: boolean
+   modified_by: varchar(255)
+   modified_date: timestamp
+   uuid: uuid
+   ancestor: uuid
+   attendee_number: integer
+   code: varchar(255)
+   course_objective: bytea
+   days: integer
+   delivery_principle: bytea
+   hours: double precision
+   level: varchar(255)
+   name: varchar(255)
+   status: varchar(255)
+   technical_requirement: bytea
+   version: varchar(255)
+   id: bigint
+}
+class syllabus_day {
+   created_by: varchar(255)
+   created_date: timestamp
+   is_deleted: boolean
+   modified_by: varchar(255)
+   modified_date: timestamp
+   uuid: uuid
+   day_no: integer
+   syllabus_id: bigint
+   id: bigint
+}
+class syllabus_unit {
+   created_by: varchar(255)
+   created_date: timestamp
+   is_deleted: boolean
+   modified_by: varchar(255)
+   modified_date: timestamp
+   uuid: uuid
+   duration: integer
+   name: varchar(255)
+   unit_no: integer
+   syllabus_day_id: bigint
+   id: bigint
+}
+class technical_code {
+   description: varchar(255)
+   technical_code_name: varchar(255)
+   technical_code_id: bigint
+}
+class technical_group {
+   description: varchar(255)
+   technical_group_name: varchar(255)
+   technical_group_id: bigint
+}
+class training_class {
+   created_by: varchar(255)
+   created_date: timestamp
+   updated_by: varchar(255)
+   updated_date: timestamp
+   uuid: uuid
+   accepted_attendee: integer
+   actual_attendee: integer
+   actual_end_date: date
+   actual_start_date: date
+   approved_by: varchar(255)
+   approved_date: timestamp
+   class_status: varchar(255)
+   code: varchar(255)
+   duration: integer
+   end_time: time
+   expected_end_date: date
+   expected_start_date: date
+   name: varchar(255)
+   planned_attendee: integer
+   remark: varchar(255)
+   review_by: varchar(255)
+   review_date: timestamp
+   slot_time: varchar(255)
+   start_time: time
+   university_code: varchar(255)
+   attendee_level_id: bigint
+   class_training_program_id: bigint
+   format_type_id: bigint
+   fsu_id: bigint
+   position_id: bigint
+   program_content_id: bigint
+   site: bigint
+   skill_id: bigint
+   id: bigint
+}
+class training_material {
+   created_by: varchar(255)
+   created_date: timestamp
+   is_deleted: boolean
+   modified_by: varchar(255)
+   modified_date: timestamp
+   uuid: uuid
+   file_name: varchar(255)
+   is_file: boolean
+   name: varchar(255)
+   url: varchar(255)
+   unit_chapter_id: bigint
+   id: bigint
+}
+class training_program {
+   created_by: varchar(255)
+   created_date: timestamp
+   updated_by: varchar(255)
+   updated_date: timestamp
+   uuid: uuid
+   code: varchar(255)
+   days: integer
+   hours: integer
+   issued_date: timestamp
+   issued_status: varchar(255)
+   name: varchar(255)
+   status: integer
+   attendee_id: bigint
+   position_id: bigint
+   technical_code_id: bigint
+   technical_group_id: bigint
+   id: bigint
+}
+class training_program_activity {
+   days: integer
+   hours: integer
+   sort: integer
+   uuid: uuid
+   class_training_program_id: bigint
+   created_by: varchar(255)
+   created_date: timestamp
+   description: varchar(255)
+   name: varchar(255)
+   updated_by: varchar(255)
+   updated_date: timestamp
+   id: bigint
+}
+class training_program_syllabus {
+   days: integer
+   hours: integer
+   sort: integer
+   uuid: uuid
+   class_training_program_id: bigint
+   name: varchar(255)
+   syllabus_uuid: uuid
+   id: bigint
+}
+class unit_chapter {
+   created_by: varchar(255)
+   created_date: timestamp
+   is_deleted: boolean
+   modified_by: varchar(255)
+   modified_date: timestamp
+   uuid: uuid
+   chapter_no: integer
+   duration: integer
+   is_online: boolean
+   name: varchar(255)
+   delivery_type_id: bigint
+   output_standard_id: bigint
+   syllabus_unit_id: bigint
+   id: bigint
+}
+
+assessment_scheme          -[#595959,plain]-^  syllabus                  : "syllabus_id:id"
+class_admin                -[#595959,plain]-^  training_class            : "class_id:id"
+class_syllabus_unit        -[#595959,plain]-^  location                  : "location_id:id"
+class_syllabus_unit        -[#595959,plain]-^  syllabus_unit             : "syllabus_unit_id:id"
+class_syllabus_unit        -[#595959,plain]-^  training_program_syllabus : "training_program_syllabus_id:id"
+contact_point              -[#595959,plain]-^  fsu                       : "fsu_id:id"
+fa_user                    -[#595959,plain]-^  fsu                       : "fsu_id:id"
+fa_user                    -[#595959,plain]-^  role                      : "role_id:id"
+location                   -[#595959,plain]-^  site                      : "site:id"
+permission                 -[#595959,plain]-^  operation                 : "operation_id:id"
+permission                 -[#595959,plain]-^  resource                  : "resource_id:id"
+program_syllabus           -[#595959,plain]-^  training_program          : "training_program_id:id"
+role_permission            -[#595959,plain]-^  permission                : "permission_id:id"
+role_permission            -[#595959,plain]-^  role                      : "role_id:id"
+syllabus_day               -[#595959,plain]-^  syllabus                  : "syllabus_id:id"
+syllabus_unit              -[#595959,plain]-^  syllabus_day              : "syllabus_day_id:id"
+training_class             -[#595959,plain]-^  attendee_type             : "attendee_level_id:attendee_type_id"
+training_class             -[#595959,plain]-^  class_training_program    : "class_training_program_id:id"
+training_class             -[#595959,plain]-^  format_type               : "format_type_id:id"
+training_class             -[#595959,plain]-^  fsu                       : "fsu_id:id"
+training_class             -[#595959,plain]-^  position                  : "position_id"
+training_class             -[#595959,plain]-^  program_content           : "program_content_id:id"
+training_class             -[#595959,plain]-^  site                      : "site:id"
+training_class             -[#595959,plain]-^  skill                     : "skill_id:id"
+training_material          -[#595959,plain]-^  unit_chapter              : "unit_chapter_id:id"
+training_program           -[#595959,plain]-^  attendee_type             : "attendee_id:attendee_type_id"
+training_program           -[#595959,plain]-^  position                  : "position_id"
+training_program           -[#595959,plain]-^  technical_code            : "technical_code_id"
+training_program           -[#595959,plain]-^  technical_group           : "technical_group_id"
+training_program_activity  -[#595959,plain]-^  class_training_program    : "class_training_program_id:id"
+training_program_syllabus  -[#595959,plain]-^  class_training_program    : "class_training_program_id:id"
+unit_chapter               -[#595959,plain]-^  delivery_type             : "delivery_type_id:id"
+unit_chapter               -[#595959,plain]-^  output_standard           : "output_standard_id:id"
+unit_chapter               -[#595959,plain]-^  syllabus_unit             : "syllabus_unit_id:id"
+@enduml
