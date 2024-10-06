@@ -1,0 +1,40 @@
+@startuml
+
+package "Public Network" {
+  actor "App User" as AppUser
+  entity "Web Application" as webapp
+  entity "API Gateway" as apigw
+
+}
+
+package "Private Network" {
+  entity "Eureka Server" as E
+  entity "Authentication Server" as AS
+  database Database as DB
+  database "AWS S3" as s3
+
+  entity "User Service" as User
+  entity "Syllabus Service" as Syllabus
+  entity "Program Service" as Program
+  entity "Class Service" as Class
+}
+
+note top of E
+  Service discovery
+end note
+
+AppUser -- webapp
+webapp <--> apigw
+User <--> apigw
+Syllabus <--> apigw
+Program <--> apigw
+Class <--> apigw
+Syllabus <--> DB
+Syllabus --> s3
+User <--> DB
+Program <--> DB
+Class <--> DB
+AS <--> User
+AS <--> apigw
+
+@enduml

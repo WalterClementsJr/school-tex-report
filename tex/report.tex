@@ -1,0 +1,193 @@
+\documentclass[12pt]{report}
+
+\usepackage{custom_tex}
+
+\usepackage{amsmath} % ?
+\usepackage{biblatex} % reference
+\usepackage{enumitem} % better list
+\usepackage{fancyhdr} % customize header footer
+\usepackage{fourier-orns} % ornaments in page
+\usepackage{graphicx}
+\usepackage{hyperref} % hyperlinks
+\usepackage{kantlipsum}
+\usepackage{lipsum} % mock text
+\usepackage{listings}
+\usepackage{longtable} % table cells with multiple line
+\usepackage{newtxtext,newtxmath} % times new roman
+\usepackage{minted} % include code blocks
+\usepackage{tikz} % vector graphics
+\usepackage{subfiles} % build from multiple file
+\usepackage{xcolor}
+\usepackage{pdfpages} % include pdf
+\usepackage{placeins} % prevent figures from moving around
+
+\usepackage{plantuml} % plantulm
+\usepackage{geometry} % page formating
+
+\usepackage{eso-pic}
+
+\usepackage{pgf}
+\usepackage{pgfpages} % custom border
+\usepackage{titlesec} % customize title
+\usepackage{tocloft} % custom title in toc
+
+% chapter page style customize
+\usepackage{etoolbox}
+
+% customize chapter title in toc
+\usepackage{tocbasic}
+
+%%%%%%
+% preamble
+%%%%%%
+
+\setlist[itemize]{align=parleft,left=0pt..1em}
+\setlength{\parindent}{0pt} % no indent (level 1) for itemize
+
+% set page format
+\geometry{
+  a4paper,
+  left=3cm,
+  right=2cm,
+  top=2cm,
+  bottom=2cm,
+  includehead,
+  twoside
+}
+
+\date{\today} % Sets date for date compiled
+\addbibresource{ref.bib}
+
+% set toc, listoffigure, listoftable margin
+\setlength{\cftbeforetoctitleskip}{0pt}
+\setlength{\cftaftertoctitleskip}{5pt}
+\setlength{\cftbeforeloftitleskip}{0pt}
+\setlength{\cftafterloftitleskip}{5pt}
+\setlength{\cftbeforelottitleskip}{0pt}
+\setlength{\cftafterlottitleskip}{5pt}
+
+% set table / figures list style
+\tocloftpagestyle{fancy}
+\renewcommand\cftloftitlefont{\mdseries\Large} % optional
+\renewcommand\cftlottitlefont{\mdseries\Large} % optional
+\renewcommand\cftfigindent{0pt}
+
+% remap default toc title
+\renewcommand{\contentsname}{MỤC LỤC}
+\renewcommand{\listfigurename}{DANH MỤC CÁC HÌNH VẼ}
+\renewcommand{\listtablename}{DANH MỤC CÁC BẢNG VẼ}
+\renewcommand{\figurename}{Hình}
+\renewcommand{\tablename}{Bảng}
+
+% chapter format and margins
+\titleformat{\chapter}{\normalfont\Large\bfseries}{Chương \thechapter.}{20pt}{\Large}
+\titlespacing*{\chapter}{0pt}{-20pt}{10pt}
+
+\titleformat*{\section}{\large\bfseries}
+\titleformat*{\subsection}{\normalsize\bfseries}
+\titleformat*{\subsubsection}{\normalsize\bfseries}
+
+% set style for first page in chapter, require etoolbox
+\patchcmd{\chapter}{\thispagestyle{plain}}{\thispagestyle{fancy}}{}{}
+
+% chapter
+\newcommand{\customchapter}[1]{
+  \chapter*{#1}\markboth{#1}{#1}
+}
+
+\begin{document}
+
+\pagestyle{fancy}
+
+\lstset{basicstyle=\ttfamily}
+\setcounter{tocdepth}{5}
+\setcounter{secnumdepth}{5}
+
+\pagestyle{fancy}
+\fancyhead{}\fancyfoot{}
+\fancyhead[L]{Báo cáo TTTN Đại học}
+\fancyhead[R]{\nouppercase\leftmark}
+\fancyfoot[L]{Nguyễn Tân Thiên - N18DCCN214}
+\fancyfoot[R]{\thepage}
+
+\fancypagestyle{kihieu}{
+\fancyhead{}\fancyfoot{}
+\fancyhead[L]{Báo cáo TTTN Đại học}
+\fancyhead[R]{KÍ HIỆU CÁC CỤM TỪ VIẾT TẮT}
+\fancyfoot[L]{Nguyễn Tân Thiên - N18DCCN214}
+\fancyfoot[R]{\thepage}
+}
+\renewcommand\chaptermark[1]{\markboth{#1}{}}
+
+\lstMakeShortInline` % for small code like in markdown e.g. `var a = 1;`
+
+\includepdf[pages=-]{cover.pdf}
+
+\pagenumbering{roman}
+\subfile{intro.tex}
+
+\pagebreak
+
+% \chapter       level 0
+% \section       level 1
+% \subsection    level 2
+% \subsubsection level 3
+% \paragraph     level 4
+% \subparagraph  level 5
+% \tableofcontents\thispagestyle{fancy}
+\subfile{toc.tex}
+
+\pagebreak
+
+\listoffigures\thispagestyle{fancy}
+
+\pagebreak
+
+\listoftables\thispagestyle{fancy}
+
+\pagebreak
+
+\thispagestyle{kihieu}
+
+\begin{center}
+    \textbf{KÍ HIỆU CÁC CỤM TỪ VIẾT TẮT}
+\end{center}
+
+\begin{tabbing}
+\hspace{8cm} \= \hspace{10cm} \kill
+
+API \> Application Programming Interface \\
+CSDL \> Cơ sở dữ liệu \\
+CTDT \> Chương trình đào tạo - training program \\
+ERD \> Entity Relationship Diagram \\
+HTTP \> HyperText Transfer Protocol \\
+IDE \> Integrated Development Environment \\
+NDDT \> Nội dung đào tạo - syllabus \\
+OOP \> Object-Oriented Programming \\
+PTDT \> Phương thức đào tạo - delivery type \\
+REST \> REpresentational State Transfer \\
+SQL \> Structured Query Language \\
+TCDR \> Tiêu chuẩn đầu ra - output standard \\
+TLDT \> Tài liệu đào tạo - training material \\
+\end{tabbing}
+
+\pagebreak
+
+\pagenumbering{arabic}
+
+\thispagestyle{fancy}
+
+\subfile{c.opening.tex}
+\subfile{c.basis.tex}
+\subfile{c3.system.tex}
+\subfile{c.db.tex}
+\subfile{c.app-ui.tex}
+\subfile{c.conclusion.tex}
+
+\pagebreak
+
+\nocite{*}
+
+\printbibliography[heading=bibintoc,type=online,title={DANH MỤC TÀI LIỆU THAM KHẢO}]
+
+\end{document}

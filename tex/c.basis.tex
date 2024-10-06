@@ -1,0 +1,94 @@
+\documentclass[report.tex]{subfiles}
+
+\begin{document}
+
+\pagebreak
+
+\chapter[Chương 1. Cơ sở lý thuyết]{Cơ sở lý thuyết}
+
+\section{Java}
+
+Java là một ngôn ngữ lập trình hướng đối tượng cho phép developer viết code một lần, chạy ở mọi nơi (write once, run everywhere) - code Java khi đã biên dịch có thể chạy trên tất cả các nền tảng hỗ trợ Java mà không cần phải biên dịch lại.
+Các ứng dụng Java thường được biên dịch thành bytecode có thể được chạy trên bất kỳ máy ảo Java (JVM) trên hầu hết các kiến trúc máy tính.
+Cú pháp của Java tương tự như C và C++, rất quen thuộc đối với các lập trình viên hệ thống.\newline
+
+Java là một trong những ngôn ngữ lập trình phổ biến nhất được sử dụng để phát triển các ứng dụng mô hình client-server.
+
+\section{PostgreSQL}
+
+PostgreSQL là một hệ thống CSDL quan hệ với hơn 35 năm phát triển đã tạo được danh tiếng về độ tin cậy, tính năng và hiệu suất.
+\newline
+Do PostgreSQL có mã nguồn mở nên có cộng đồng developer rộng lớn và hệ sinh thái cung cấp các bộ tính năng quan trọng mà thường chỉ có ở các sản phẩm độc quyền như như những tính năng của CSDL không gian địa lý (geospatial), temporal database (lưu dữ liệu thời gian) hoặc các tính năng được lấy cảm hứng từ các sản phẩm CSDL khác.
+Ngoài ra còn có nhiều third-party cung cấp các tính năng khác chẳng hạn như cải tiến GUI - giao diện người dùng, hoặc công cụ cân bằng tải,\dots
+
+\section{Eureka}
+
+Eureka là một công cụ khám phá dịch vụ - service discovery được phát triển ở Netflix, chủ yếu được sử dụng trong môi trường microservice. 
+\newline
+Service discovery cho phép các service tìm và liên lạc với nhau mà không cần hardcode tên máy chủ và cổng,
+rất cần thiết trong môi trường cloud nơi có nhiều service có thể thay đổi linh hoạt.
+
+\section{Prometheus}
+
+Prometheus là một công cụ mã nguồn mở được phát triển tại SoundCloud, có chức năng chính là giám sát hệ thống và cảnh báo.
+Được thiết kế để giám sát các hệ thống phân tán và linh hoạt, làm cho nó trở thành một lựa chọn phổ biến cho việc giám sát hệ thống microservice.
+\newline
+Prometheus có thể thu thập số liệu từ các tài nguyên, như ứng dụng, service, hạ tầng được trong khoảng thời gian nhất định,
+theo các biểu thức, hiển thị kết quả và có thể kích hoạt cảnh báo khi thỏa mãn điều kiện cụ thể.
+\newline
+Prometheus cung cấp sự linh hoạt để giám sát và cảnh báo trong môi trường microservice, giúp người dùng theo dõi và quản lý hiệu suất và tính sẵn sàng của hệ thống hiệu quả hơn.
+
+\section{Grafana}
+
+Grafana là một công cụ mã nguồn mở để trực quan hóa dữ liệu và tạo dashboard cho các hệ thống giám sát.
+Grafana cung cấp giao diện đơn giản và linh hoạt để tạo biểu đồ, đồ thị và dashboard cho việc hiển thị dữ liệu giám sát.
+
+\section{Zipkin}
+
+Zipkin là một hệ thống mã nguồn mở được sử dụng để giám sát và ghi lại đường đi của các request qua các service trong hệ thống phân tán, giúp người dùng có thể theo dõi và phân tích thông tin về thời gian trễ và hiệu suất của các thành phần trong hệ thống.
+
+Zipkin hoạt động bằng cách gửi trace packets (các gói tin theo dõi) qua các service trong quá trình xử lý request.
+Mỗi trace packet bao gồm thông tin về request, thời gian bắt đầu và kết thúc, cũng như các thông tin khác như dữ liệu người dùng và metadata.
+Các gói tin này được thu thập và lưu trữ trong cơ sở dữ liệu để xử lí và phân tích về sau.
+\newline
+Zipkin còn cung cấp một web UI để người dùng theo dõi các thông tin và phân tích dữ liệu.
+Bằng cách sử dụng giao diện này, người dùng có thể theo dõi đường đi của một request qua các service, xác định thời gian trễ và tìm hiểu các vấn đề hiệu suất trong hệ thống.
+\newline
+Với khả năng theo dõi và phân tích dữ liệu phân tán, Zipkin là một công cụ phổ biến trong việc giám sát và tối ưu hóa hiệu suất của các mô hình service phân tán như microservice.
+
+\section{Docker}
+
+Docker là một nền tảng mã nguồn mở cho việc tạo, triển khai và chạy các ứng dụng trong container, một môi trường ảo hóa gọn nhẹ.
+Docker cho phép đóng gói ứng dụng và tất cả các dependency của ứng dụng đó (thư viện và các tài nguyên hệ thống) vào một container duy nhất bằng công nghệ containerization để tạo ra các container tách biệt và cô lập.
+\newline
+Container là một đơn vị độc lập mà có thể chạy trên bất kỳ máy tính hoặc máy chủ nào đã cài đặt Docker mà người dùng không cần lo lắng về sự khác biệt về môi trường và cấu hình.
+Mỗi container chứa tất cả những gì cần thiết để chạy một ứng dụng, bao gồm mã nguồn, thư viện, biến môi trường, các cấu hình,\dots
+\newline
+Docker đã trở thành một công cụ quan trọng trong việc triển khai ứng dụng và quản lý hạ tầng trong các môi trường phát triển phần mềm hiện đại.
+
+
+\section{RESTFul Web Service}
+
+Restful Web Service (còn được gọi là RESTful API) là một kiểu kiến trúc và giao thức được sử dụng trong việc thiết kế và xây dựng các service web.
+định nghĩa các quy tắc để thiết kết các web service chú trọng vào tài nguyên hệ thống.
+REST (Representational State Transfer) là một kiến trúc phân cấp dựa trên giao thức HTTP, được sử dụng để tạo ra các service web linh hoạt, có thể mở rộng và tương tác dễ dàng.
+
+\section{Giám sát microservice}
+
+Giám sát (monitoring) là việc theo dõi và thu thập thông tin về các thành phần và hoạt động trong hệ thống.
+bằng cách phân tích dữ liệu từ các chỉ số, log và cảnh báo.
+Với sự phân tán và độ phức tạp của kiến trúc microservice, việc giám sát là cực kỳ quan trọng để đảm bảo tính sẵn sàng, hiệu suất và tin cậy của hệ thống.
+
+\begin{itemize}[noitemsep]
+  \item Thu thập và theo dõi các chỉ số (Metrics): thu thập và phân tích các chỉ số liên quan đến hiệu suất của service, chẳng hạn như - thời gian phản hồi, tỷ lệ lỗi, tải trọng, tài nguyên đang sử dụng, số lượng request\dots
+  \item Theo dõi phân tán (Distributed Tracing): cho phép theo dõi quá trình data di chuyển qua các microservice trong một request hoặc giao dịch.
+Giúp xác định và phân tích các vấn đề liên quan đến hiệu suất và sự cố trong quá trình giao tiếp giữa các thành phần trong microservice.
+  \item Sự kiện và log (Event and Log Monitoring): Giám sát log từ các microservice giúp ghi lại các hoạt động quan trọng và xác định các vấn đề hoặc hành vi bất thường.
+Phân tích các sự kiện trong log có thể tìm hiểu được nguyên nhân gốc rễ của các vấn đề và đưa ra các biện pháp khắc phục.
+  \item Thiết lập cảnh báo cho phép nhận được thông báo tức thì khi có vấn đề xảy ra hoặc khi các chỉ số vượt ngưỡng cho phép.
+\end{itemize}
+
+Việc giám sát microservice rất có lợi cho việc nhận ra các vấn đề sớm hơn và đưa ra biện pháp khắc phục
+để đảm bảo tính sẵn sàng, hiệu suất và độ tin cậy của hệ thống.
+
+\end{document}

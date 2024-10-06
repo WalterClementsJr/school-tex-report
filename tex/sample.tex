@@ -1,0 +1,84 @@
+\documentclass{report}
+
+\usepackage{custom_tex}
+\usepackage{markdown}
+\usepackage{lipsum}
+\usepackage{fancyhdr}
+\usepackage{plantuml}
+\usepackage{tikz}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage{geometry}
+
+\geometry{
+  a4paper,
+  left=3cm,
+  right=2cm,
+  top=2cm,
+  bottom=2cm,
+  includehead,
+  twoside
+}
+
+\pagestyle{fancy}
+\fancyhead{}\fancyfoot{}
+\fancyhead[L]{Báo cáo}
+\fancyhead[R]{\nouppercase\leftmark}
+\fancyfoot[L]{Nguyễn Tân Thiên}
+\fancyfoot[R]{\thepage}
+
+\setcounter{tocdepth}{5}
+\raggedbottom
+
+\begin{document}
+
+% example markdown
+\begin{markdown}
+
+| Name | Protect who/what? | Who carries? | Who is involved? |
+| :--- | ---- | ---- | ---- |
+| Criminal law | society | Law enforcement of federal and state governments | |
+| Civial law | business | court | affected parties  in business | 
+| Administrative law | day-to-day business of government agencies | federal agency | |
+
+: Comparison of Criminal law, Civil law and administrative law
+
+\end{markdown}
+
+\textbf{class\_attendee}: \underline{id}
+\newline
+\textbf{training\_class\_id}
+\newline
+\textbf{\underline{username, training\_class\_id}}
+
+\begin{itemize}
+  \item text1
+  \item t2
+  \item t3
+\end{itemize}
+
+No item and no list separation:
+
+% \setlist{nolistsep}
+\begin{itemize}[noitemsep]
+    \item one
+    \item two
+    \item three
+\end{itemize}
+
+
+A normal list:
+\begin{itemize}
+    \item one
+    \item two
+    \item three
+\end{itemize}
+
+No item separation:
+\begin{itemize}[nosep]
+    \item one
+    \item two
+    \item three
+\end{itemize}
+
+\end{document}

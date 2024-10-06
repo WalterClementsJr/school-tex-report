@@ -1,0 +1,157 @@
+
+@startuml
+
+scale 800 width
+
+top to bottom direction
+skinparam linetype ortho
+
+class class_admin {
+   created_by: varchar(255)
+   created_date: timestamp
+   updated_by: varchar(255)
+   updated_date: timestamp
+   uuid: uuid
+   admin_uuid: uuid
+   + {static} class_id: bigint
+   + {static} id: bigint
+}
+class class_attendee_type {
+   description: varchar(255)
+   name: varchar(255)
+   + {static} id: bigint
+}
+class class_position {
+   name: varchar(255)
+   + {static} id: bigint
+}
+class class_syllabus_unit {
+   syllabus_unit_id: uuid
+   trainer_uuid: uuid
+   + {static} location_id: bigint
+   + {static} training_program_syllabus_id: bigint
+   + {static} id: bigint
+}
+class class_training_program {
+   created_by: varchar(255)
+   created_date: timestamp
+   updated_by: varchar(255)
+   updated_date: timestamp
+   uuid: uuid
+   days: integer
+   hours: integer
+   name: varchar(255)
+   training_program_uuid: uuid
+   + {static} id: bigint
+}
+class contact_point {
+   content: varchar(255)
+   type: varchar(255)
+   + {static} fsu_id: bigint
+   + {static} id: bigint
+}
+class format_type {
+   abbreviation: varchar(255)
+   name: varchar(255)
+   + {static} id: bigint
+}
+class fsu {
+   name: varchar(255)
+   + {static} id: bigint
+}
+class location {
+   address: varchar(255)
+   name: varchar(255)
+   site: bigint
+   + {static} id: bigint
+}
+class program_content {
+   name: varchar(255)
+   + {static} id: bigint
+}
+class site {
+   abbreviation: varchar(255)
+   name: varchar(255)
+   + {static} id: bigint
+}
+class skill {
+   name: varchar(255)
+   + {static} id: bigint
+}
+class training_class {
+   created_by: varchar(255)
+   created_date: timestamp
+   updated_by: varchar(255)
+   updated_date: timestamp
+   uuid: uuid
+   accepted_attendee: integer
+   actual_attendee: integer
+   actual_end_date: date
+   actual_start_date: date
+   approved_by: varchar(255)
+   approved_date: timestamp
+   class_status: varchar(255)
+   code: varchar(255)
+   duration: integer
+   end_time: time
+   expected_end_date: date
+   expected_start_date: date
+   name: varchar(255)
+   planned_attendee: integer
+   remark: varchar(255)
+   review_by: varchar(255)
+   review_date: timestamp
+   slot_time: varchar(255)
+   start_time: time
+   university_code: varchar(255)
+   + {static} attendee_level_id: bigint
+   + {static} class_training_program_id: bigint
+   + {static} format_type_id: bigint
+   + {static} fsu_id: bigint
+   + {static} position_id: bigint
+   + {static} program_content_id: bigint
+   site: bigint
+   + {static} skill_id: bigint
+   + {static} id: bigint
+}
+class training_program_activity {
+   days: integer
+   hours: integer
+   sort: integer
+   uuid: uuid
+   + {static} class_training_program_id: bigint
+   created_by: varchar(255)
+   created_date: timestamp
+   description: varchar(255)
+   name: varchar(255)
+   updated_by: varchar(255)
+   updated_date: timestamp
+   + {static} id: bigint
+}
+class training_program_syllabus {
+   days: integer
+   hours: integer
+   sort: integer
+   uuid: uuid
+   + {static} class_training_program_id: bigint
+   name: varchar(255)
+   syllabus_uuid: uuid
+   + {static} id: bigint
+}
+
+class_admin                -[plain]-^  training_class            : "class_id:id"
+class_syllabus_unit        -[plain]-^  location                  : "location_id:id"
+class_syllabus_unit        -[plain]-^  training_program_syllabus : "training_program_syllabus_id:id"
+contact_point              -[plain]-^  fsu                       : "fsu_id:id"
+location                   -[plain]-^  site                      : "site:id"
+training_class             -[plain]-^  class_attendee_type       : "attendee_level_id:id"
+training_class             -[plain]-^  class_position            : "position_id:id"
+training_class             -[plain]-^  class_training_program    : "class_training_program_id:id"
+training_class             -[plain]-^  format_type               : "format_type_id:id"
+training_class             -[plain]-^  fsu                       : "fsu_id:id"
+training_class             -[plain]-^  program_content           : "program_content_id:id"
+training_class             -[plain]-^  site                      : "site:id"
+training_class             -[plain]-^  skill                     : "skill_id:id"
+training_program_activity  -[plain]-^  class_training_program    : "class_training_program_id:id"
+training_program_syllabus  -[plain]-^  class_training_program    : "class_training_program_id:id"
+@enduml

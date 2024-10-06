@@ -1,0 +1,84 @@
+@startuml
+
+scale 600 width
+
+top to bottom direction
+skinparam linetype ortho
+
+class fa_user {
+   {field} created_by: uuid
+   {field} created_time: timestamp
+   {field} updated_by: uuid
+   {field} updated_time: timestamp
+   {field} uuid: uuid
+   {field} address: varchar(255)
+   {field} avatar: varchar(255)
+   {field} birthdate: date
+   {field} disabled: boolean
+   {field} email: varchar(255)
+   {field} expired: boolean
+   {field} full_name: varchar(255)
+   {field} gender: varchar(255)
+   {field} locked: boolean
+   {field} password: varchar(255)
+   {field} site: bigint
+   {field} status: varchar(255)
+   {field} username: varchar(255)
+   + {static} {field} fsu_id: bigint
+   + {static} {field} role_id: bigint
+   + {static} {field} id: bigint
+}
+class fsu {
+   name: varchar(255)
+   + {static} id: bigint
+}
+class operation {
+   created_by: uuid
+   created_time: timestamp
+   updated_by: uuid
+   updated_time: timestamp
+   uuid: uuid
+   name: varchar(255)
+   + {static} id: bigint
+}
+class permission {
+   created_by: uuid
+   created_time: timestamp
+   updated_by: uuid
+   updated_time: timestamp
+   uuid: uuid
+   name: varchar(255)
+   + {static} operation_id: bigint
+   + {static} resource_id: bigint
+   + {static} id: bigint
+}
+class resource {
+   created_by: uuid
+   created_time: timestamp
+   updated_by: uuid
+   updated_time: timestamp
+   uuid: uuid
+   name: varchar(255)
+   + {static} id: bigint
+}
+class role {
+   created_by: uuid
+   created_time: timestamp
+   updated_by: uuid
+   updated_time: timestamp
+   uuid: uuid
+   name: varchar(255)
+   + {static} id: bigint
+}
+class role_permission {
+   + {static} role_id: bigint
+   + {static} permission_id: bigint
+}
+
+fa_user          -[plain]-^  fsu             : "fsu_id:id"
+fa_user          -[plain]-^  role            : "role_id:id"
+permission       -[plain]-^  operation       : "operation_id:id"
+permission       -[plain]-^  resource        : "resource_id:id"
+role_permission  -[plain]-^  permission      : "permission_id:id"
+role_permission  -[plain]-^  role            : "role_id:id"
+@enduml

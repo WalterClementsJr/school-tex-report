@@ -1,0 +1,113 @@
+@startuml
+
+skinparam dpi 100
+
+top to bottom direction
+skinparam linetype ortho
+
+class assessment_scheme {
+   assignment: double precision
+   final_practice: double precision
+   final: double precision
+   final_theory: double precision
+   gpa: double precision
+   quiz: double precision
+   + {static} syllabus_id: bigint
+   + {static} id: bigint
+}
+class delivery_type {
+   descriptions: varchar(255)
+   icon: varchar(255)
+   name: varchar(255)
+   + {static} id: bigint
+}
+class output_standard {
+   code: varchar(255)
+   descriptions: varchar(255)
+   name: varchar(255)
+   + {static} id: bigint
+}
+class syllabus {
+   created_by: varchar(255)
+   created_date: timestamp
+   is_deleted: boolean
+   modified_by: varchar(255)
+   modified_date: timestamp
+   uuid: uuid
+   ancestor: uuid
+   attendee_number: integer
+   code: varchar(255)
+   course_objective: bytea
+   days: integer
+   delivery_principle: bytea
+   hours: double precision
+   level: varchar(255)
+   name: varchar(255)
+   status: varchar(255)
+   technical_requirement: bytea
+   version: varchar(255)
+   + {static} id: bigint
+}
+class syllabus_day {
+   created_by: varchar(255)
+   created_date: timestamp
+   is_deleted: boolean
+   modified_by: varchar(255)
+   modified_date: timestamp
+   uuid: uuid
+   day_no: integer
+   + {static} syllabus_id: bigint
+   + {static} id: bigint
+}
+class syllabus_unit {
+   created_by: varchar(255)
+   created_date: timestamp
+   is_deleted: boolean
+   modified_by: varchar(255)
+   modified_date: timestamp
+   uuid: uuid
+   duration: integer
+   name: varchar(255)
+   unit_no: integer
+   + {static} syllabus_day_id: bigint
+   + {static} + id: bigint
+}
+class training_material {
+   created_by: varchar(255)
+   created_date: timestamp
+   is_deleted: boolean
+   modified_by: varchar(255)
+   modified_date: timestamp
+   uuid: uuid
+   file_name: varchar(255)
+   is_file: boolean
+   name: varchar(255)
+   url: varchar(255)
+   + {static} unit_chapter_id: bigint
+   + {static} id: bigint
+}
+class unit_chapter {
+   created_by: varchar(255)
+   created_date: timestamp
+   is_deleted: boolean
+   modified_by: varchar(255)
+   modified_date: timestamp
+   uuid: uuid
+   chapter_no: integer
+   duration: integer
+   is_online: boolean
+   name: varchar(255)
+   + {static} delivery_type_id: bigint
+   + {static} output_standard_id: bigint
+   + {static} syllabus_unit_id: bigint
+   + {static} id: bigint
+}
+
+assessment_scheme  -[plain]-^  syllabus          : "syllabus_id:id"
+syllabus_day       -[plain]-^  syllabus          : "syllabus_id:id"
+syllabus_unit      -[plain]-^  syllabus_day      : "syllabus_day_id:id"
+training_material  -[plain]-^  unit_chapter      : "unit_chapter_id:id"
+unit_chapter       -[plain]-^  delivery_type     : "delivery_type_id:id"
+unit_chapter       -[plain]-^  output_standard   : "output_standard_id:id"
+unit_chapter       -[plain]-^  syllabus_unit     : "syllabus_unit_id:id"
+@enduml

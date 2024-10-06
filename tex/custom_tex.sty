@@ -1,0 +1,135 @@
+\ProvidesPackage{custom_tex}[2024/07/12]
+
+\RequirePackage{tabularx}
+\RequirePackage{ragged2e}
+\RequirePackage{markdown}
+\RequirePackage[object=vectorian]{pgfornament}
+
+
+% figure placement hack todo delete
+% \let\Oldsection\section
+% \renewcommand{\section}{\FloatBarrier\Oldsection}
+% \let\Oldsubsection\subsection
+% \renewcommand{\subsection}{\FloatBarrier\Oldsubsection}
+% \let\Oldsubsubsection\subsubsection
+% \renewcommand{\subsubsection}{\FloatBarrier\Oldsubsubsection}
+
+% render markdown removeable, we dont use markdowns anymore
+\markdownSetup{
+  pipeTables = true,
+  tableCaptions = true,
+}
+
+\newcount\markdownLaTeXRowCounter
+\newcount\markdownLaTeXRowTotal
+\newcount\markdownLaTeXColumnCounter
+\newcount\markdownLaTeXColumnTotal
+\newtoks\markdownLaTeXTable
+\newtoks\markdownLaTeXTableAlignment
+\newtoks\markdownLaTeXTableEnd
+
+\markdownSetup{
+  renderers = {
+    table = {%
+      \markdownLaTeXTable={}%
+      \markdownLaTeXTableAlignment={}%
+      \markdownLaTeXTableEnd={%
+        \end{tabularx}%
+      }%
+      \ifx\empty#1\empty\else
+        \addto@hook\markdownLaTeXTable{%
+          \begin{table}
+          \caption{#1}
+          \centering
+        }%
+        \addto@hook\markdownLaTeXTableEnd{%
+          \end{table}%
+        }%
+      \fi
+      \addto@hook\markdownLaTeXTable{
+        \begin{tabularx}{\linewidth}%
+      }%
+      \markdownLaTeXRowCounter=0%
+      \markdownLaTeXRowTotal=#2%
+      \markdownLaTeXColumnTotal=#3%
+      \markdownLaTeXRenderTableRow
+    }
+  }
+}
+
+\def\markdownLaTeXRenderTableRow#1{%
+  \markdownLaTeXColumnCounter=0%
+  \ifnum\markdownLaTeXRowCounter=0\relax
+    \markdownLaTeXReadAlignments#1%
+    \markdownLaTeXTable=\expandafter\expandafter\expandafter{%
+      \expandafter\the\expandafter\markdownLaTeXTable\expandafter{%
+        \the\markdownLaTeXTableAlignment
+      }%
+    }%
+    \addto@hook\markdownLaTeXTable{\hline}%
+  \else
+    \markdownLaTeXRenderTableCell#1%
+    \addto@hook\markdownLaTeXTable{\hline}%
+  \fi
+  \advance\markdownLaTeXRowCounter by 1\relax
+  \ifnum\markdownLaTeXRowCounter>\markdownLaTeXRowTotal\relax
+    \expandafter\the\expandafter\markdownLaTeXTable
+    \the\markdownLaTeXTableEnd
+    \expandafter\@gobble
+  \fi\markdownLaTeXRenderTableRow
+}
+
+\def\markdownLaTeXReadAlignments#1{%
+  \advance\markdownLaTeXColumnCounter by 1\relax
+  \if#1d%
+    \addto@hook\markdownLaTeXTableAlignment{|X<{\RaggedRight}}%
+  \else
+    \addto@hook\markdownLaTeXTableAlignment{|#1<{\RaggedRight}}%
+  \fi
+  \ifnum\markdownLaTeXColumnCounter<\markdownLaTeXColumnTotal
+    \relax
+  \else
+    \addto@hook\markdownLaTeXTableAlignment{|}%
+    \expandafter\@gobble
+  \fi\markdownLaTeXReadAlignments
+}
+
+\def\markdownLaTeXRenderTableCell#1{%
+  \advance\markdownLaTeXColumnCounter by 1\relax
+  \ifnum\markdownLaTeXColumnCounter<\markdownLaTeXColumnTotal\relax
+    \addto@hook\markdownLaTeXTable{#1&}%
+  \else
+    \addto@hook\markdownLaTeXTable{#1\\}%
+    \expandafter\@gobble
+  \fi\markdownLaTeXRenderTableCell
+}
+
+% draw ornaments
+\newcommand{\pageornament}[1]{%
+  \begin{tikzpicture}[remember picture, overlay, color=black]
+      \node[anchor=north west] at (current page.north west){\pgfornament[width=25mm]{#1}};
+      \node[anchor=north east] at (current page.north east){\pgfornament[width=25mm,symmetry=v]{#1}};
+      \node[anchor=south west] at (current page.south west){\pgfornament[width=25mm,symmetry=h]{#1}};
+      \node[anchor=south east] at (current page.south east){\pgfornament[width=25mm,symmetry=c]{#1}};
+  \end{tikzpicture}
+}
+
+% draw page filled with dots
+\makeatletter
+\newlength\dottedlinefillheight
+\setlength\dottedlinefillheight{.25in}
+
+\def\fillwithdottedlines{%
+  \begingroup
+  \ifhmode
+    \par
+  \fi
+  \hrule height \z@
+  \nobreak
+  \setbox0=\hbox to \hsize{\hskip \@totalleftmargin
+          \vrule height \dottedlinefillheight depth \z@ width \z@
+          \dotfill}%
+  \cleaders \copy0 \vfill \hbox{}%
+  \endgroup
+}
+\makeatother
